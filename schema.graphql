@@ -1,0 +1,56 @@
+""" Estructura del cliente """
+    type Cliente {
+        id: ID
+        nombre: String
+        apellido: String
+        empresa: String
+        emails: [Email]
+        edad: Int
+        tipo: TipoCliente
+        pedidos: [Pedido]
+    }
+
+    """ Información sobre el email """
+    type Email {
+        email: String
+    }
+    """ Información sobre el pedido """
+    type Pedido {
+        producto: String
+        precio: Int
+    }
+    """ Asigna la categoría del cliente """
+    enum TipoCliente {
+        BASICO
+        PREMIUM
+    }
+    """ Información sobre cliente """
+    type Query {
+        getCliente(id: ID): Cliente
+    }
+
+    input PedidoInput {
+        producto: String
+        precio: Int
+    }
+
+    input EmailInput {
+        email: String
+    }
+    """ Detalles acerca de cliente """
+    input ClienteInput {
+        id: ID
+        nombre: String!
+        apellido: String!
+        empresa: String
+        emails: [EmailInput]
+        edad: Int
+        tipo: TipoCliente
+        pedidos: [PedidoInput]
+    }
+
+    type Mutation{
+        #Nombre del Resolver, input con Datos y valor que retorna
+        """ Te permite crear nuevos cliente """
+        crearCliente(input: ClienteInput) : Cliente
+    }
